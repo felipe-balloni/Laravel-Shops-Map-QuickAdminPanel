@@ -20,9 +20,9 @@
                         @endif
                         @if($shop->categories->count())
                             <div class="geodir-single-taxonomies-container">
-                                <p class="geodir_post_taxomomies clearfix"> 
+                                <p class="geodir_post_taxomomies clearfix">
                                     <span class="geodir-category">
-                                        Categories: 
+                                        {{ trans('global.categories') }}
                                         @foreach($shop->categories as $category)
                                             <a href="{{ route('home') }}?category={{ $category->id }}">{{ $category->name }}</a>{{ !$loop->last ? ',' : ''  }}
                                         @endforeach
@@ -161,7 +161,7 @@ $(function(){
 });
 </script>
 @if($shop->latitude && $shop->longitude)
-    <script type='text/javascript' src='https://maps.google.com/maps/api/js?language=en&key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&region=GB'></script>
+    <script type='text/javascript' src='https://maps.google.com/maps/api/js?language=en&key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&language=pt-BR&region=BR'></script>
     <script defer>
         function initialize() {
             var latLng = new google.maps.LatLng({{ $shop->latitude }}, {{ $shop->longitude }});

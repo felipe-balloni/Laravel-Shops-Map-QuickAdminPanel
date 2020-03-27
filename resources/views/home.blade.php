@@ -16,7 +16,7 @@
                                         <div class="geodir-search">
                                             <div class='gd-search-input-wrapper gd-search-field-cpt gd-search-field-taxonomy gd-search-field-categories'>
                                                 <select name="category" class="cat_select">
-                                                    <option value="">Category</option>
+                                                    <option value="">{{ trans('global.categories') }}</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{ $category->id }}"{{ old('category', request()->input('category')) == $category->id ? ' selected' : '' }}>{{ $category->name }}</option>
                                                     @endforeach

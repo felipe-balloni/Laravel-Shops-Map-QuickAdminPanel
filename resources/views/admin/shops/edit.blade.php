@@ -93,7 +93,7 @@
                     <select class="custom-select my-1 mr-sm-2" name="from_hours[{{ $day->id }}]">
                         <option value="">--</option>
                         @foreach(range(0,23) as $hours)
-                            <option 
+                            <option
                                 value="{{ $hours < 10 ? "0$hours" : $hours }}"
                                 {{ old('from_hours.'.$day->id, $shop->days->find($day->id) ? $shop->days->find($day->id)->pivot['from_hours'] : null) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}
                             >{{ $hours < 10 ? "0$hours" : $hours }}</option>
@@ -109,7 +109,7 @@
                     <select class="custom-select my-1 mr-sm-2" name="to_hours[{{ $day->id }}]">
                         <option value="">--</option>
                         @foreach(range(0,23) as $hours)
-                            <option 
+                            <option
                                 value="{{ $hours < 10 ? "0$hours" : $hours }}"
                                 {{ old('to_hours.'.$day->id, $shop->days->find($day->id) ? $shop->days->find($day->id)->pivot['to_hours'] : null) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}
                             >{{ $hours < 10 ? "0$hours" : $hours }}</option>
@@ -137,7 +137,7 @@
 @endsection
 
 @section('scripts')
-<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=en&region=GB" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize&language=pt-BR&region=BR" async defer></script>
 <script src="/js/mapInput.js"></script>
 <script>
     var uploadedPhotosMap = {}
