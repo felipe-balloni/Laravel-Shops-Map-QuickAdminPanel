@@ -94,40 +94,58 @@
                 <span class="help-block">{{ trans('cruds.shop.fields.active_helper') }}</span>
             </div>
             <label>{{ trans('cruds.shop.fields.working_hours') }}</label>
-            @foreach($days as $day)
-            <div class="form-inline">
-                <label class="my-1 mr-2">{{ ucfirst($day->name) }}: from</label>
-                <select class="custom-select my-1 mr-sm-2" name="from_hours[{{ $day->id }}]">
-                    <option value="">--</option>
-                    @foreach(range(0,23) as $hours)
-                    <option value="{{ $hours < 10 ? "0$hours" : $hours }}"
-                        {{ old('from_hours.'.$day->id) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}>
-                        {{ $hours < 10 ? "0$hours" : $hours }}</option>
+
+            <table class="table table-striped w-50" >
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Days</th>
+                        <th>From</th>
+                        <th>To</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($days as $day)
+                    <tr>
+                        <th scope="row">{{ ucfirst($day->name) }}</th>
+                        <td>
+                            <div class="form-inline">
+                                <select class="custom-select my-1 mr-sm-2" name="from_hours[{{ $day->id }}]">
+                                    <option value="">--</option>
+                                    @foreach(range(0,23) as $hours)
+                                    <option value="{{ $hours < 10 ? "0$hours" : $hours }}"
+                                        {{ old('from_hours.'.$day->id) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}>
+                                        {{ $hours < 10 ? "0$hours" : $hours }}</option>
+                                    @endforeach
+                                </select>
+                                <label class="my-1 mr-2">:</label>
+                                <select class="custom-select my-1 mr-sm-2" name="from_minutes[{{ $day->id }}]">
+                                    <option value="">--</option>
+                                    <option value="00" {{ old('from_minutes.'.$day->id) == '00' ? 'selected' : '' }}>00</option>
+                                    <option value="30" {{ old('from_minutes.'.$day->id) == '30' ? 'selected' : '' }}>30</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-inline">
+                                <select class="custom-select my-1 mr-sm-2" name="to_hours[{{ $day->id }}]">
+                                    <option value="">--</option>
+                                    @foreach(range(0,23) as $hours)
+                                    <option value="{{ $hours < 10 ? "0$hours" : $hours }}"
+                                        {{ old('to_hours.'.$day->id) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}>
+                                        {{ $hours < 10 ? "0$hours" : $hours }}</option>
+                                    @endforeach
+                                </select>
+                                <label class="my-1 mr-2">:</label>
+                                <select class="custom-select my-1 mr-sm-2" name="to_minutes[{{ $day->id }}]">
+                                    <option value="">--</option>
+                                    <option value="00" {{ old('to_minutes.'.$day->id) == '00' ? 'selected' : '' }}>00</option>
+                                    <option value="30" {{ old('to_minutes.'.$day->id) == '30' ? 'selected' : '' }}>30</option>
+                                </select>
+                            </div>
+                        </td>
                     @endforeach
-                </select>
-                <label class="my-1 mr-2">:</label>
-                <select class="custom-select my-1 mr-sm-2" name="from_minutes[{{ $day->id }}]">
-                    <option value="">--</option>
-                    <option value="00" {{ old('from_minutes.'.$day->id) == '00' ? 'selected' : '' }}>00</option>
-                    <option value="30" {{ old('from_minutes.'.$day->id) == '30' ? 'selected' : '' }}>30</option>
-                </select>
-                <label class="my-1 mr-2">to</label>
-                <select class="custom-select my-1 mr-sm-2" name="to_hours[{{ $day->id }}]">
-                    <option value="">--</option>
-                    @foreach(range(0,23) as $hours)
-                    <option value="{{ $hours < 10 ? "0$hours" : $hours }}"
-                        {{ old('to_hours.'.$day->id) == ($hours < 10 ? "0$hours" : $hours) ? 'selected' : '' }}>
-                        {{ $hours < 10 ? "0$hours" : $hours }}</option>
-                    @endforeach
-                </select>
-                <label class="my-1 mr-2">:</label>
-                <select class="custom-select my-1 mr-sm-2" name="to_minutes[{{ $day->id }}]">
-                    <option value="">--</option>
-                    <option value="00" {{ old('to_minutes.'.$day->id) == '00' ? 'selected' : '' }}>00</option>
-                    <option value="30" {{ old('to_minutes.'.$day->id) == '30' ? 'selected' : '' }}>30</option>
-                </select>
-            </div>
-            @endforeach
+                </tbody>
+            </table>
 
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
