@@ -16,7 +16,7 @@
                                         <div class="geodir-search">
                                             <div class='gd-search-input-wrapper gd-search-field-cpt gd-search-field-taxonomy gd-search-field-categories'>
                                                 <select name="category" class="cat_select">
-                                                    <option value="">{{ trans('global.categories') }}</option>
+                                                    <option value="">{{ __('global.categories') }}</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{ $category->id }}"{{ old('category', request()->input('category')) == $category->id ? ' selected' : '' }}>{{ $category->name }}</option>
                                                     @endforeach
@@ -42,7 +42,11 @@
                                                         <ul class="geodir-post-image geodir-images clearfix">
                                                             <li>
                                                                 <a href='{{ route('shop', $shop->id) }}'>
-                                                                    <img src="{{ $shop->thumbnail }}" width="1440" height="960" class="geodir-lazy-load align size-medium_large" />
+                                                                    @if ($shop->photos->count())
+                                                                        <img src="{{ $shop->thumbnail }}" width="1440" height="960" class="geodir-lazy-load align size-medium_large" />
+                                                                    @else
+                                                                        <img src="//via.placeholder.com/1440x960.png?text=Sem+Imagem" width="1440" height="960" class="geodir-lazy-load align size-medium_large" />
+                                                                    @endif
                                                                 </a>
                                                             </li>
                                                         </ul>
@@ -68,7 +72,7 @@
                                                 </div>
                                             @endif
                                             <div class="geodir-post-content-container">
-                                                <div class="geodir_post_meta  geodir-field-post_content" style='max-height:120px;overflow:hidden;'>{{ $shop->description }} <a href='{{ route('shop', $shop->id) }}' class='gd-read-more  gd-read-more-fade'>Read more...</a></div>
+                                                <div class="geodir_post_meta geodir-field-post_content" style='max-height:120px;overflow:hidden;'>{!! $shop->description !!} <a href='{{ route('shop', $shop->id) }}' class='gd-read-more  gd-read-more-fade'>Read more...</a></div>
                                             </div>
                                         </div>
                                     </li>

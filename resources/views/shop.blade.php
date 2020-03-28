@@ -17,12 +17,14 @@
                                     @endforeach
                                 </div>
                             </div>
+                        @else
+                            <img src="//via.placeholder.com/480x360.png?text=Sem+Imagem" width="480" height="360" class="geodir-lazy-load align size-medium_large" />
                         @endif
                         @if($shop->categories->count())
                             <div class="geodir-single-taxonomies-container">
                                 <p class="geodir_post_taxomomies clearfix">
                                     <span class="geodir-category">
-                                        {{ trans('global.categories') }}
+                                        {{ __('global.categories') }}
                                         @foreach($shop->categories as $category)
                                             <a href="{{ route('home') }}?category={{ $category->id }}">{{ $category->name }}</a>{{ !$loop->last ? ',' : ''  }}
                                         @endforeach
@@ -50,7 +52,7 @@
                                         <div class="geodir-post-meta-container">
                                             <div class="geodir_post_meta  geodir-field-post_content">
                                                 <p>Address: {{ $shop->address }}</p>
-                                                <p>Description: {{ $shop->description }}</p>
+                                                <p>Description: {!! $shop->description !!}</p>
                                                 @if($shop->days->count())
                                                     @if($shop->working_hours->currentOpenRange(now()))
                                                         <p>Shop is open and will close at {{ $shop->working_hours->currentOpenRange(now())->end() }}.</p>
@@ -166,7 +168,7 @@ $(function(){
         function initialize() {
             var latLng = new google.maps.LatLng({{ $shop->latitude }}, {{ $shop->longitude }});
             var mapOptions = {
-                zoom: 14,
+                zoom: 16,
                 minZoom: 6,
                 maxZoom: 17,
                 zoomControl:true,
